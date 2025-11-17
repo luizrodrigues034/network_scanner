@@ -62,7 +62,7 @@ def main():
 
 
 def scan_port(host:str,port:int):
-
+    print("teste git")
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(1)
     if sock.connect_ex((host,port)) == 0:
