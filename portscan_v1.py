@@ -14,7 +14,8 @@ reset = "\033[0m"
 regex_ipv4 = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
 
 def main():
-    
+
+
     parser = argparse.ArgumentParser(
     description="Scanner de Portas Simples",
     epilog="Exemplo: python script.py -H 192.168.0.1 -P 80"
@@ -61,12 +62,18 @@ def main():
         print(f"[{vermelho}*{reset}]Erro ocorrido:{error}")
 
 
-def scan_port(host:str,port:int):
-    print("teste git")
+def scan_port(host:str,port:int) ->list:
+    
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(1)
     if sock.connect_ex((host,port)) == 0:
         print(f"[{verde}*{reset}]Port {port} is open")
+        try:
+            banner = sock.recv(1024).decode('utf-8', errors='ignore').strip()
+            print(f"Banner: {banner}")
+        except:
+            pass
+        
                   
     sock.close()
 
